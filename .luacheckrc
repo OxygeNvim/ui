@@ -5,9 +5,9 @@ stds.nvim = {
     'vim',
     'config',
     'utils',
-    'r',
-    'commands',
+    'base46',
     'ui',
+    'r',
   },
   read_globals = {
     'os',
