@@ -4,9 +4,7 @@ M.setup = function()
   local base46 = require('oxygen.base46')
   base46.load_highlight('oxygen.ui.statusline')
 
-  require('oxygen.ui.modules.statusline.components')
-
-  vim.opt.statusline = '%!v:lua.statusline.table()'
+  vim.opt.statusline = '%!v:lua.require("oxygen.ui.modules.statusline.components").table()'
 end
 
 return M

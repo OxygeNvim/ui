@@ -60,13 +60,13 @@ M.mode = function()
   })
 end
 
---- @param filename string
---- @param extension string
+--- @param file_name string
+--- @param file_extension string
 ---
 --- @return string
-M.fileicon = function(filename, extension)
-  local icon, color = ui_utils.get_icon(filename, extension, 'OxygenStatusFileIcon')
-  local hl = table.concat({ 'OxygenStatusFileIcon', extension or filename })
+M.file_icon = function(file_name, file_extension)
+  local icon, color = ui_utils.get_icon(file_name, file_extension, 'OxygenStatusFileIcon')
+  local hl = table.concat({ 'OxygenStatusFileIcon', file_extension or file_name })
 
   local colors = base46.get_theme_tb('base_30')
 
@@ -79,7 +79,7 @@ end
 --- @param filename string
 ---
 --- @return string
-M.filename = function(bufnr, filename)
+M.file_name = function(bufnr, filename)
   return table.concat({
     '%#OxygenStatusLineFileName#',
     filename,
@@ -160,9 +160,9 @@ M.table = function()
   return table.concat({
     M.mode(),
     ' ',
-    M.fileicon(filename, extension),
+    M.file_icon(filename, extension),
     ' ',
-    M.filename(bufnr, filename),
+    M.file_name(bufnr, filename),
     ' ',
     M.lsp_diagnostics(),
 
@@ -173,7 +173,5 @@ M.table = function()
     M.cursor_position(),
   })
 end
-
-_G.statusline = M
 
 return M

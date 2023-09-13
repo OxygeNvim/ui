@@ -43,18 +43,18 @@ M.get_filename = function(bufnr)
   return filename, extension
 end
 
---- @param filename string
---- @param extension string
+--- @param file_name string
+--- @param file_extension string
 --- @param default_hl string
 ---
---- @return string, string
-M.get_icon = function(filename, extension, default_hl)
+--- @return string icon, string color
+M.get_icon = function(file_name, file_extension, default_hl)
   local icon = icons.file
   local color = ''
 
   local ok_devicons, devicons = r('nvim-web-devicons')
   if ok_devicons then
-    local ft_icon, ft_color = devicons.get_icon_color(filename, extension)
+    local ft_icon, ft_color = devicons.get_icon_color(file_name, file_extension)
     icon = (ft_icon ~= nil and ft_icon) or icon
     color = (ft_color ~= nil and ft_color) or default_hl
   end
