@@ -5,10 +5,11 @@ local api = vim.api
 
 local icons = require('oxygen.ui.modules.icons')
 
---- @param bufnr number
+--- @param merge_filename_and_extension boolean
+--- @param bufnr? number
 ---
 --- @return string, string
-M.get_filename = function(bufnr)
+M.get_filename = function(merge_filename_and_extension, bufnr)
   local filename, extension
 
   if bufnr then
@@ -33,10 +34,10 @@ M.get_filename = function(bufnr)
   end
 
   if #filename > 16 then
-    filename = table.concat({ filename:sub(1, 14), '..' })
+    filename = table.concat({ filename:sub(1, 14), '...' })
   end
 
-  if extension ~= '' then
+  if merge_filename_and_extension and extension ~= '' then
     filename = filename .. '.' .. extension
   end
 

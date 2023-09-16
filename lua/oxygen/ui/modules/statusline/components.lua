@@ -155,7 +155,7 @@ end
 --- @return string
 M.table = function()
   local bufnr = api.nvim_get_current_buf()
-  local filename, extension = ui_utils.get_filename(bufnr)
+  local filename, extension = ui_utils.get_filename(true, bufnr)
 
   return table.concat({
     M.mode(),
