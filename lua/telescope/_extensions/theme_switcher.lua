@@ -32,20 +32,44 @@ local theme_switcher = function()
       results = base46_utils.get_themes(),
     }),
     sorter = conf.generic_sorter(),
-    attach_mappings = function(prompt_bufnr, _)
-      vim.api.nvim_create_autocmd('TextChangedI', {
-        buffer = prompt_bufnr,
-        callback = function()
-          if action_state.get_selected_entry() then
-            base46.change_theme(action_state.get_selected_entry()[1], false)
-          end
-        end,
-      })
+    attach_mappings = function(prompt_bufnr, map)
+      vim.schedule(function()
+        vim.api.nvim_create_autocmd('TextChangedI', {
+          buffer = prompt_bufnr,
+          callback = function()
+            if action_state.get_selected_entry() then
+              base46.change_theme(action_state.get_selected_entry()[1], false)
+            end
+          end,
+        })
+      end)
 
       actions.select_default:replace(function()
-        actions.close(prompt_bufnr)
+        if action_state.get_selected_entry() then
+          actions.close(prompt_bufnr)
 
-        base46.change_theme(action_state.get_selected_entry()[1], true)
+          base46.change_theme(action_state.get_selected_entry()[1], true)
+        end
+      end)
+
+      map('i', '<C-n>', function()
+        actions.move_selection_next(prompt_bufnr)
+        base46.change_theme(action_state.get_selected_entry()[1], false)
+      end)
+
+      map('i', '<Down>', function()
+        actions.move_selection_next(prompt_bufnr)
+        base46.change_theme(action_state.get_selected_entry()[1], false)
+      end)
+
+      map('i', '<C-p>', function()
+        actions.move_selection_previous(prompt_bufnr)
+        base46.change_theme(action_state.get_selected_entry()[1], false)
+      end)
+
+      map('i', '<Up>', function()
+        actions.move_selection_previous(prompt_bufnr)
+        base46.change_theme(action_state.get_selected_entry()[1], false)
       end)
 
       return true
