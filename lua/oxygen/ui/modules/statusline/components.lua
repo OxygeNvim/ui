@@ -155,14 +155,14 @@ end
 --- @return string
 M.table = function()
   local bufnr = api.nvim_get_current_buf()
-  local filename, extension = ui_utils.get_filename(true, bufnr)
+  local file_name, file_extension = ui_utils.get_file_name(bufnr)
 
   return table.concat({
     M.mode(),
     ' ',
-    M.file_icon(filename, extension),
+    M.file_icon(file_name, file_extension),
     ' ',
-    M.file_name(bufnr, filename),
+    M.file_name(bufnr, file_name),
     ' ',
     M.lsp_diagnostics(),
 

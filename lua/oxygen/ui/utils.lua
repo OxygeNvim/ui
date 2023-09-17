@@ -5,43 +5,42 @@ local api = vim.api
 
 local icons = require('oxygen.ui.modules.icons')
 
---- @param merge_filename_and_extension boolean
 --- @param bufnr? number
 ---
---- @return string, string
-M.get_filename = function(merge_filename_and_extension, bufnr)
-  local filename, extension
+--- @return string file_name, string file_extension
+M.get_file_name = function(bufnr)
+  local file_name, file_extension
 
   if bufnr then
     local name = api.nvim_buf_get_name(bufnr)
-    filename = fn.fnamemodify(fn.fnamemodify(name, ':t'), ':r')
-    extension = fn.fnamemodify(name, ':e')
+    file_name = fn.fnamemodify(fn.fnamemodify(name, ':t'), ':r')
+    file_extension = fn.fnamemodify(name, ':e')
   else
-    filename = fn.fnamemodify(fn.expand('%:t'), ':r')
-    extension = fn.expand('%:e')
+    file_name = fn.fnamemodify(fn.expand('%:t'), ':r')
+    file_extension = fn.expand('%:e')
   end
 
-  if filename == '' then
-    filename = 'Empty'
+  if file_name == '' then
+    file_name = 'Empty'
   end
 
-  if filename:sub(1, 1) == ' ' then
-    filename = filename:sub(2)
+  if file_name:sub(1, 1) == ' ' then
+    file_name = file_name:sub(2)
   end
 
-  if filename:sub(-1, -1) == ' ' then
-    filename = filename:sub(1, -2)
+  if file_name:sub(-1, -1) == ' ' then
+    file_name = file_name:sub(1, -2)
   end
 
-  if #filename > 16 then
-    filename = table.concat({ filename:sub(1, 14), '...' })
+  if #file_name > 16 then
+    file_name = table.concat({ file_name:sub(1, 14), '...' })
   end
 
-  if merge_filename_and_extension and extension ~= '' then
-    filename = filename .. '.' .. extension
+  if file_extension ~= '' then
+    file_name = file_name .. '.' .. file_extension
   end
 
-  return filename, extension
+  return file_name, file_extension
 end
 
 --- @param file_name string
