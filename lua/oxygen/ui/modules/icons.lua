@@ -119,6 +119,13 @@ local M = {
     Value = '󰎠',
     Variable = '󰀫',
     WhileStatement = '󰑖',
+    Compound = '',
+    Recovery = '',
+    TranslationUnit = '',
+    PackExpansion = '',
+    TemplateTypeParm = '',
+    TemplateTemplateParm = '',
+    TemplateParamObject = '',
   },
   devicons = {
     default_icon = {
