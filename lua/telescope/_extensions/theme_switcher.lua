@@ -46,9 +46,17 @@ local theme_switcher = function()
 
       actions.select_default:replace(function()
         if action_state.get_selected_entry() then
-          actions.close(prompt_bufnr)
-
           base46.change_theme(action_state.get_selected_entry()[1], true)
+
+          actions.close(prompt_bufnr)
+        end
+      end)
+
+      map('i', '<CR>', function()
+        if action_state.get_selected_entry() then
+          base46.change_theme(action_state.get_selected_entry()[1], true)
+
+          actions.close(prompt_bufnr)
         end
       end)
 
