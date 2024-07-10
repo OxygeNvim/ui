@@ -3,7 +3,6 @@ local M = {}
 local fn = vim.fn
 local api = vim.api
 
-local utils = require("oxygen.core.utils")
 local icons = require('oxygen.ui.icons')
 
 --- @param bufnr? number
@@ -46,21 +45,14 @@ end
 
 --- @param file_name string
 --- @param file_extension string
---- @param default_hl string
 ---
---- @return string icon, string color
-M.get_devicon = function(file_name, file_extension, default_hl)
-  local icon = icons.file
-  local color = ''
+--- @return string, string|nil
+M.get_devicon = function(file_name, file_extension)
+  local ft_icon, ft_color = require('nvim-web-devicons').get_icon_color(file_name, file_extension)
 
-  local ok_devicons, devicons = utils.r('nvim-web-devicons')
-  if ok_devicons then
-    local ft_icon, ft_color = devicons.get_icon_color(file_name, file_extension)
-    icon = (ft_icon ~= nil and ft_icon) or icon
-    color = (ft_color ~= nil and ft_color) or default_hl
-  end
+  ft_icon = (ft_icon ~= nil and ft_icon) or icons.file
 
-  return icon, color
+  return ft_icon, ft_color
 end
 
 return M

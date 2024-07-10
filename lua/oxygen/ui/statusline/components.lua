@@ -85,12 +85,18 @@ end
 ---
 --- @return string
 M.file_icon = function(file_name, file_extension)
-  local icon, color = ui_utils.get_devicon(file_name, file_extension, "OxygenStatusFileIcon")
-  local hl = table.concat({ "OxygenStatusFileIcon", file_extension or file_name })
-
   local colors = base46.get_theme_tb("base_30")
 
-  api.nvim_set_hl(0, hl, { fg = color, bg = colors.darker_black })
+  local icon, color = ui_utils.get_devicon(file_name, file_extension)
+
+  local default_hl = "OxygenStatusLineFileIcon"
+  local hl = table.concat({ default_hl, file_extension or file_name })
+
+  if (file_name:match("^[a-zA-Z]*$")) and (file_extension:match("^[a-zA-Z]*$")) then
+    api.nvim_set_hl(0, hl, { fg = color, bg = colors.darker_black })
+  else
+    hl = default_hl
+  end
 
   return table.concat({ "%#", hl, "#", icon })
 end
