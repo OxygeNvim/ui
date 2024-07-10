@@ -13,7 +13,7 @@ local theme_switcher = function()
   local bufnr = vim.api.nvim_get_current_buf()
 
   local previewer = previewers.new_buffer_previewer({
-    define_preview = function(self, entry)
+    define_preview = function(self)
       local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
       vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
 
