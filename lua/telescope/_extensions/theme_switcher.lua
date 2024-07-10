@@ -7,8 +7,7 @@ local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 
 local base46 = require('oxygen.base46')
-local base46_utils = require('oxygen.base46.utils')
-local icons = require('oxygen.ui.modules.icons')
+local icons = require('oxygen.ui.icons')
 
 local theme_switcher = function()
   local bufnr = vim.api.nvim_get_current_buf()
@@ -20,8 +19,6 @@ local theme_switcher = function()
 
       local ft = (vim.filetype.match({ buf = bufnr }) or 'diff'):match('%w+')
       require('telescope.previewers.utils').highlighter(self.state.bufnr, ft)
-
-      base46.change_theme(entry.value, false)
     end,
   })
 
@@ -29,32 +26,19 @@ local theme_switcher = function()
     prompt_title = icons.color_palette .. ' Theme Switcher',
     previewer = previewer,
     finder = finders.new_table({
-      results = base46_utils.get_themes(),
+      results = base46.get_themes(),
     }),
     sorter = conf.generic_sorter(),
     attach_mappings = function(prompt_bufnr, map)
-      vim.schedule(function()
-        vim.api.nvim_create_autocmd('TextChangedI', {
-          buffer = prompt_bufnr,
-          callback = function()
-            if action_state.get_selected_entry() then
-              base46.change_theme(action_state.get_selected_entry()[1], false)
-            end
-          end,
-        })
-      end)
+      map('i', '<ESC>', function()
+        base46.change_theme(config.ui.theme, true)
 
-      actions.select_default:replace(function()
-        if action_state.get_selected_entry() then
-          base46.change_theme(action_state.get_selected_entry()[1], true)
-
-          actions.close(prompt_bufnr)
-        end
+        actions.close(prompt_bufnr)
       end)
 
       map('i', '<CR>', function()
         if action_state.get_selected_entry() then
-          base46.change_theme(action_state.get_selected_entry()[1], true)
+          base46.change_theme(action_state.get_selected_entry()[1], true, true)
 
           actions.close(prompt_bufnr)
         end
