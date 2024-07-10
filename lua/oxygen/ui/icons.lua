@@ -1,6 +1,6 @@
 local M = {
-  warning = '',
   error = '󰅙',
+  warn = '',
   hint = '󰌵',
   info = '󰋼',
   debug = '',
@@ -8,6 +8,7 @@ local M = {
   dot = '',
   left = '',
   right = '',
+  position = '',
   search = '',
   arrow_open = '',
   arrow_closed = '',
@@ -16,6 +17,8 @@ local M = {
   sleep = '鈴',
   commit = '',
   tick = '',
+  success = '󰄬',
+  loading = '󰔟',
   empty_dot = '◌',
   empty = '',
   color_palette = '󱥚',
@@ -36,24 +39,6 @@ local M = {
         untracked = '★',
         deleted = '',
       },
-    },
-  },
-  separator_styles = {
-    default = {
-      left = '',
-      right = '',
-    },
-    round = {
-      left = '',
-      right = '',
-    },
-    block = {
-      left = '█',
-      right = '█',
-    },
-    arrow = {
-      left = '',
-      right = '',
     },
   },
   kind_icons = {

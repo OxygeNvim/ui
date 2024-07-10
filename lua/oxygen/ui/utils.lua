@@ -3,7 +3,7 @@ local M = {}
 local fn = vim.fn
 local api = vim.api
 
-local icons = require('oxygen.ui.modules.icons')
+local icons = require('oxygen.ui.icons')
 
 --- @param bufnr? number
 ---
@@ -48,7 +48,7 @@ end
 --- @param default_hl string
 ---
 --- @return string icon, string color
-M.get_icon = function(file_name, file_extension, default_hl)
+M.get_devicon = function(file_name, file_extension, default_hl)
   local icon = icons.file
   local color = ''
 
@@ -60,27 +60,6 @@ M.get_icon = function(file_name, file_extension, default_hl)
   end
 
   return icon, color
-end
-
---- @param bufnr number
----
---- @return boolean
-M.is_buffer_valid = function(bufnr)
-  return api.nvim_buf_is_valid(bufnr) and api.nvim_buf_get_option(bufnr, 'buflisted')
-end
-
---- @param bufnr number
----
---- @return boolean
-M.is_modified = function(bufnr)
-  return bufnr and api.nvim_buf_get_option(bufnr, 'modified') or false
-end
-
---- @param bufnr number
----
---- @return boolean
-M.is_readonly = function(bufnr)
-  return bufnr and api.nvim_buf_get_option(bufnr, 'readonly') or false
 end
 
 return M
