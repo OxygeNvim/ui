@@ -34,11 +34,6 @@ local M = {
         symlink = '',
         symlink_open = '',
       },
-      git = {
-        renamed = '➜',
-        untracked = '★',
-        deleted = '',
-      },
     },
   },
   kind_icons = {
@@ -257,10 +252,5 @@ local M = {
 
 M.nvimtree.glyphs.folder.arrow_open = M.arrow_open
 M.nvimtree.glyphs.folder.arrow_closed = M.arrow_closed
-
-M.nvimtree.glyphs.git.unstaged = M.close
-M.nvimtree.glyphs.git.staged = M.tick
-M.nvimtree.glyphs.git.unmerged = M.branch
-M.nvimtree.glyphs.git.ignored = M.empty_dot
 
 return M
