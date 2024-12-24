@@ -1,6 +1,6 @@
 <div align="center">
     <h1>ui</h1>
-    <h2>UI elements for OxygeNvim</h1>
+    <h2>UI elements for OxygeNvim</h2>
 </div>
 
 <div align="center">
